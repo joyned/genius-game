@@ -1,20 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Genius
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="content">
+    <div class="win-rounds">
+      <p>Rodadas acertadas</p>
+      <div class="rounds">
+        {{rounds}}
+      </div>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let color of avaliableColors">
+          <div class="color_{{color.id}}" [style.background]="color.color" (click)="selectColor(color)"></div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="showReset" style="text-align: center;">
+      <ion-button color="primary" (click)="ngOnInit()">Recomeçar</ion-button>
+    </div>
   </div>
 </ion-content>
