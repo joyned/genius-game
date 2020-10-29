@@ -1,0 +1,44 @@
+.bg-image {
+  --background: url('../../assets/background.png') no-repeat center center fixed;
+  background-size: cover;
+  min-width: 1000px;
+}
+
+.genius-img-content {
+  
+  .image-animation {
+    position: absolute;
+    width: 38%;
+    bottom: 45%;
+    animation-name: genius-image-animation;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-delay: 5s;
+    transform: 3%;
+  }
+
+  .text-animation {
+    position: absolute;
+    width: 38%;
+    bottom: -10%;
+    animation-name: genius-text-animation;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-delay: 4.5s
+  }
+}
+
+
+@keyframes genius-image-animation {
+  0% {
+    bottom: 45%;
+  }
+  100% {
+    bottom: 35%;
+  }
+}
+
+@keyframes genius-text-animation {
+  0% {left: 0%;}
+  100% {left: -50%;}
+}

@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'genius',
+    loadChildren: () => import('./genius/genius.module').then( m => m.GeniusPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,31 +1,5 @@
-:root {
-  --ion-safe-area-top: 20px;
-  --ion-safe-area-bottom: 22px;
-}
-
-ion-col > div {
-  width: 46vw;
-  height: 46vw;
-  background-color: #f7f7f7;
-  border: solid 1px #ddd;
-  padding: 10px;
-}
-
-ion-col > div:focus {
-  background-color: chocolate;
-}
-
-.win-rounds {
-  color: blue;
-  margin: 0 auto;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  text-align: center;
-  .rounds {
-    margin: 0 auto;
-    border: 3px solid blue;
-    border-radius: 25px;
-    width: 25%;
-    padding: 2%;
-  }
+.bg-image {
+  --background: url('../../assets/background.png') no-repeat center center fixed;
+  background-size: cover;
+  min-width: 1000px;
 }
