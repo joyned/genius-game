@@ -8,6 +8,8 @@ import { GeniusColor } from '../model/GeniusColor';
 })
 export class GeniusPage implements OnInit {
 
+  public image = '../../assets/down_left.png'
+
   // Cores que já foram sorteadas
   public geniusColorList: GeniusColor[];
 
@@ -26,29 +28,34 @@ export class GeniusPage implements OnInit {
   // Quantidade de vezes que o usuário acertou
   public rounds = 0;
 
-  // Exibe botão reset
-  public showReset = false;
+  // Jogo ja começou
+  public started = false;
+
+  // Resetar?
+  public reset = false;
+
+  // Nao mostra botão de inio ao resetar
+  public notShowInitButtonOnRestart = false;
+
+  // Carregando a tela?
+  public isIniting = true;
 
   public avaliableColors: GeniusColor[] = [
     {
       id: 1,
-      color: '#FF0000',
-      selectedColor: '#000000'
+      image: '../../assets/sup_left.png'
     },
     {
       id: 2,
-      color: '#00FF00',
-      selectedColor: '#000000'
+      image: '../../assets/sup_right.png'
     },
     {
       id: 3,
-      color: '#0000FF',
-      selectedColor: '#000000'
+      image: '../../assets/down_left.png'
     },
     {
       id: 4,
-      color: '#FFFF00',
-      selectedColor: '#000000'
+      image: '../../assets/down_right.png'
     }
   ];
 
@@ -65,36 +72,51 @@ export class GeniusPage implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.initAttributes();
-    // this.generateNumberAndBlinkSquareWithTimeOut();
+  }
+  
+
+  public startGame() {
+    this.started = true;
+    this.initAttributes();
+    this.generateNumberAndBlinkSquareWithTimeOut();
+    this.isIniting = false;
   }
 
+  public restart() {
+    this.reset = false;
+    this.startGame();
+    this.notShowInitButtonOnRestart = true;
+  }
 
   private initAttributes() {
     this.geniusColorList = [];
     this.selectedColor = new GeniusColor();
     this.rounds = 0;
-    this.showReset = false;
+    this.reset = false;
     this.currentIndex = 0;
     this.clickUserTimes = 0;
   }
 
   public selectColor(color: GeniusColor) {
-    const selectRightColor = this.geniusColorList[this.currentIndex].id === color.id;
-    if (selectRightColor) {
-      if (this.geniusColorList.length > 1) {
-        this.currentIndex++;
-        this.clickUserTimes++;
+    if (this.started) {
+      this.piscaQuadradoAoClicar(color);
+      const selectRightColor = this.geniusColorList[this.currentIndex].id === color.id;
+      if (selectRightColor) {
+        if (this.geniusColorList.length > 1) {
+          this.currentIndex++;
+          this.clickUserTimes++;
+        }
+        if ((this.clickUserTimes === this.geniusColorList.length) || this.geniusColorList.length === 1) {
+          this.generateNumberAndBlinkSquareWithTimeOut();
+          this.currentIndex = 0;
+          this.clickUserTimes = 0;
+          this.rounds++;
+        }
+      } else {
+        this.rounds = 0;
+        this.reset = true;
+        this.started = false;
       }
-      if ((this.clickUserTimes === this.geniusColorList.length) || this.geniusColorList.length === 1) {
-        this.generateNumberAndBlinkSquareWithTimeOut();
-        this.currentIndex = 0;
-        this.clickUserTimes = 0;
-        this.rounds++;
-      }
-    } else {
-      this.rounds = 0;
-      this.showReset = true;
     }
   }
 
@@ -117,26 +139,30 @@ export class GeniusPage implements OnInit {
   public piscaQuadrado() {
     this.geniusColorList.forEach(function (element, index) {
       setTimeout(() => {
-        let shand = document.getElementsByClassName('color_' + element.id) as HTMLCollectionOf<HTMLElement>;
+        let shand = document.getElementsByClassName('piscado_' + element.id) as HTMLCollectionOf<HTMLElement>;
 
         if (shand.length != 0) {
-          shand[0].style.background = element.selectedColor;
+          shand[0].style.display = 'block';
         }
         setTimeout(() => {
           if (shand.length != 0) {
-            shand[0].style.background = element.color;
+            shand[0].style.display = 'none';
           }
         }, 500);
       }, index * 1000);
     });
   }
 
-  private changeBackgroundColor(className: string, color: string) {
-    let shand = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
-
+  private piscaQuadradoAoClicar(color: GeniusColor) {
+    let shand = document.getElementsByClassName('piscado_' + color.id) as HTMLCollectionOf<HTMLElement>;
     if (shand.length != 0) {
-      shand[0].style.background = color;
+      shand[0].style.display = 'block';
     }
+    setTimeout(() => {
+      if (shand.length != 0) {
+        shand[0].style.display = 'none';
+      }
+    }, 500);
   }
 
 }

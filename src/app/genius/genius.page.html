@@ -1,7 +1,27 @@
 <ion-content class="bg-image">
+
+  <div class="rounds">
+    <p style="margin-bottom: 0;">Rodadas</p>
+    <p style="margin-top: 0;">{{rounds}}</p>
+  </div>
+
   <div class="genius-img-content">
     <img src="../../assets/icon.png" class="image-animation">
     <img src="../../assets/text.png" class="text-animation">
+  </div>
+
+  <div *ngFor="let color of avaliableColors">
+    <div class="selected_area_{{color.id}}" (click)="selectColor(color)">
+    </div>
+    <img [src]="color.image" class="piscado piscado_{{color.id}}" alt="dasd">
+  </div>
+
+  <div *ngIf="!isIniting && !started">
+    <img [ngClass]="reset ? 'button-reset show-without-delay' : 'button-reset hide'" src="../../assets/button-reset.png" alt="reset" (click)="restart()">
+  </div>
+
+  <div *ngIf="!notShowInitButtonOnRestart">
+    <img [ngClass]="started ? 'button-start hide' : 'button-start show'" src="../../assets/button-start.png" alt="start" (click)="startGame()">
   </div>
 
 </ion-content>

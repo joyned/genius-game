@@ -1,7 +1,69 @@
+@font-face {
+  font-family: Reglisse;
+  src: url("../../assets/Reglisse.otf") format("opentype");
+}
+
+.rounds {
+  position: absolute;
+  top: -50%;
+  left: 10%;
+  text-align: center;
+  animation-name: rounds-animation;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-delay: 5s;
+
+  p {
+    font-family: 'Reglisse', sans-serif;
+    font-size: xxx-large;
+  }
+}
+
 .bg-image {
   --background: url('../../assets/background.png') no-repeat center center fixed;
   background-size: cover;
   min-width: 1000px;
+}
+
+.piscado {
+  position: absolute;
+  width: 38%;
+  top: 20.5%;
+  display: none;
+}
+
+.button-start {
+  position: absolute;
+  left: 4.72%;
+  top: 110%;
+  width: 28%;
+}
+
+.button-reset {
+  position: absolute;
+  left: 4.72%;
+  top: 110%;
+  width: 28%;
+  z-index: 1000;
+}
+
+.show { 
+  animation-name: button-animation-show;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-delay: 5s;
+}
+
+.show-without-delay {
+  animation-name: button-animation-show;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+.hide {
+  animation-name: button-animation-hide;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
 }
 
 .genius-img-content {
@@ -28,6 +90,47 @@
   }
 }
 
+.selected_area_1 {
+  width: 146px;
+  height: 75px;
+  position: absolute;
+  top: 30%;
+  left: 4%;
+  transform: rotate(-45deg);
+  border-radius: 36% 44% 31% 17%;
+}
+
+.selected_area_2 {
+  width: 146px;
+  height: 75px;
+  position: absolute;
+  top: 30%;
+  left: 19%;
+  transform: rotate(45deg);
+  border-radius: 36% 44% 31% 17%;
+}
+
+.selected_area_3 {
+  width: 146px;
+  height: 75px;
+  position: absolute;
+  top: 48%;
+  left: 4%;
+  transform: rotate(230deg);
+  border-radius: 36% 44% 31% 17%;
+}
+
+.selected_area_4 {
+  width: 146px;
+  height: 75px;
+  position: absolute;
+  top: 48%;
+  left: 19%;
+  transform: rotate(135deg);
+  border-radius: 36% 44% 31% 17%;
+}
+
+
 
 @keyframes genius-image-animation {
   0% {
@@ -41,4 +144,33 @@
 @keyframes genius-text-animation {
   0% {left: 0%;}
   100% {left: -50%;}
+}
+
+
+
+@keyframes button-animation-show {
+  0% {
+    top: 110%;
+  }
+  100% {
+    top: 65%;
+  }
+}
+
+@keyframes button-animation-hide {
+  0% {
+    top: 65%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+@keyframes rounds-animation {
+  0% {
+    top: -50%;
+  }
+  100% {
+    top: 0;
+  }
 }
